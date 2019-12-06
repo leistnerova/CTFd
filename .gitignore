@@ -73,3 +73,8 @@ CTFd/uploads
 
 # JS
 node_modules/
+
+# kompose binary converts docker-compose files to kubernetes resources
+# and I store them in k8s directory
+kompose
+k8s/
