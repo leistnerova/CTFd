@@ -9,10 +9,10 @@ import re
 EMAIL_REGEX = r"(^[^@\s]+@[^@\s]+\.[^@\s]+$)"
 
 
-def sendmail(addr, text):
+def sendmail(addr, text, text_type=""):
     provider = get_mail_provider()
     if provider == 'smtp':
-        return smtp.sendmail(addr, text)
+        return smtp.sendmail(addr, text, text_type)
     if provider == 'mailgun':
         return mailgun.sendmail(addr, text)
     return False, "No mail settings configured"

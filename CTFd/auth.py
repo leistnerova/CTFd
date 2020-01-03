@@ -16,6 +16,7 @@ from CTFd.utils import config, validators
 from CTFd.utils import email
 from CTFd.utils.security.auth import login_user, logout_user
 from CTFd.utils.security.passwords import hash_password, check_password
+from CTFd.utils.crypto import generate_password
 from CTFd.utils.logging import log
 from CTFd.utils.decorators.visibility import check_registration_visibility
 from CTFd.utils.modes import TEAMS_MODE, USERS_MODE
@@ -127,17 +128,23 @@ def reset_password(data=None):
 @ratelimit(method="POST", limit=10, interval=5)
 def register():
     errors = get_errors()
-    if request.method == 'POST':
-        name = request.form['name']
-        email_address = request.form['email']
-        password = request.form['password']
+    auto_create = request.args.get('autocreate', 0)
+    if request.method == 'POST' or auto_create:
+        if auto_create:
+            name = request.args.get('name', '')
+            email_address = request.args.get('email', '')
+            password = generate_password()
+        else:
+            name = request.form['name']
+            email_address = request.form['email']
+            password = request.form['password']
 
         name_len = len(name) == 0
         names = Users.query.add_columns('name', 'id').filter_by(name=name).first()
         emails = Users.query.add_columns('email', 'id').filter_by(email=email_address).first()
         pass_short = len(password) == 0
         pass_long = len(password) > 128
-        valid_email = validators.validate_email(request.form['email'])
+        valid_email = validators.validate_email(email_address)
         team_name_email_check = validators.validate_email(name)
 
         local_id, _, domain = email_address.partition('@')
@@ -170,9 +177,9 @@ def register():
             return render_template(
                 'register.html',
                 errors=errors,
-                name=request.form['name'],
-                email=request.form['email'],
-                password=request.form['password']
+                name=name,
+                email=email_address,
+                password=password,
             )
         else:
             with app.app_context():
@@ -194,13 +201,23 @@ def register():
                     return redirect(url_for('auth.confirm'))
                 else:  # Don't care about confirming users
                     if config.can_send_mail():  # We want to notify the user that they have registered.
-                        email.sendmail(
-                            request.form['email'],
-                            "You've successfully registered for {}".format(get_config('ctf_name'))
-                        )
+                        if auto_create:
+                            msg = render_template(
+                                'email_password.html',
+                                name=name, password=password
+                            )
+                            email.sendmail(email_address, msg, 'html')
+                        else:
+                            email.sendmail(
+                                email_address,
+                                "You've successfully registered for {}".format(get_config('ctf_name'))
+                            )
 
         log('registrations', "[{date}] {ip} - {name} registered with {email}")
         db.session.close()
+        if auto_create:
+            return redirect(url_for('views.welcome', autocreate=1))
+
         return redirect(url_for('challenges.listing'))
     else:
         return render_template('register.html', errors=errors)
