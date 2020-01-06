@@ -216,3 +216,16 @@ def themes(theme, path):
         return send_file(filename)
     else:
         abort(404)
+
+
+@views.route("/welcome", methods=["GET"])
+@authed_only
+def welcome():
+    user = get_current_user()
+    auto_create = request.args.get("autocreate", 0)
+    return render_template(
+        "welcome.html",
+        name=user.name,
+        email=user.email,
+        auto_create=auto_create
+    )
