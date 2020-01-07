@@ -76,10 +76,11 @@ def get_standings(count=None, admin=False):
             Model.name.label('name'),
             Model.hidden,
             Model.banned,
+            Model.verified,
             sumscores.columns.score
         ) \
             .join(sumscores, Model.id == sumscores.columns.account_id) \
-            .order_by(sumscores.columns.score.desc(), sumscores.columns.id)
+            .order_by(Model.verified.desc(), sumscores.columns.score.desc(), sumscores.columns.id)
     else:
         standings_query = db.session.query(
             Model.id.label('account_id'),

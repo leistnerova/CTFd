@@ -1,4 +1,5 @@
 from flask import render_template, request
+from CTFd.utils import email
 from CTFd.utils import get_config
 from CTFd.utils.decorators import admins_only, ratelimit
 from CTFd.utils.modes import USERS_MODE, TEAMS_MODE
@@ -50,7 +51,7 @@ def users_new():
     return render_template('admin/users/new.html')
 
 
-@admin.route('/admin/users/<int:user_id>')
+@admin.route('/admin/users/<int:user_id>', methods=['POST', 'GET'])
 @admins_only
 def users_detail(user_id):
     # Get user object
@@ -88,6 +89,11 @@ def users_detail(user_id):
     score = user.get_score(admin=True)
     place = user.get_place(admin=True)
 
+    message = ""
+    if request.method == 'POST' and request.form['msg']:
+        email.sendmail(user.email, request.form['msg'])
+        message = "Message to {} was sent.".format(user.email)
+
     return render_template(
         'admin/users/user.html',
         solves=solves,
@@ -97,5 +103,6 @@ def users_detail(user_id):
         missing=missing,
         place=place,
         fails=fails,
-        awards=awards
+        awards=awards,
+        message=message
     )

@@ -165,6 +165,9 @@ def register():
         if team_name_email_check is True:
             errors.append('Your team name cannot be an email address')
         if emails:
+            if auto_create:  # already was created, go to login
+                user = Users.query.filter_by(email=email_address).first()
+                return redirect(url_for('auth.login', name=user.name))
             errors.append('That email has already been used')
         if pass_short:
             errors.append('Pick a longer password')
@@ -188,6 +191,8 @@ def register():
                     email=email_address.lower(),
                     password=password.strip()
                 )
+                if auto_create:
+                    user.verified = True
                 db.session.add(user)
                 db.session.commit()
                 db.session.flush()
@@ -262,7 +267,7 @@ def login():
             return render_template('login.html', errors=errors)
     else:
         db.session.close()
-        return render_template('login.html', errors=errors)
+        return render_template('login.html', name=request.args.get('name', None), errors=errors)
 
 
 @auth.route('/oauth')
