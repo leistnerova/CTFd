@@ -11,7 +11,7 @@ import six
 @admin.route('/admin/challenges')
 @admins_only
 def challenges_listing():
-    challenges = Challenges.query.all()
+    challenges = Challenges.query.order_by(Challenges.value.asc()).all()
     return render_template('admin/challenges/challenges.html', challenges=challenges)
 
 
