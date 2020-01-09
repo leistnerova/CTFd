@@ -16,6 +16,7 @@
 						<td><b>Team</b></td>
 						<td><b>Score</b></td>
 						<td><b>Visibility</b></td>
+						<td><b>Verified</b></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -49,6 +50,11 @@
 									onclick="toggle_account(this)" team-id="{{ standing.account_id }}" state="visible">Visible
 							</button>
 						{% endif %}
+						</td>
+						<td>
+							{% if standing.verified %}
+								<span class="badge badge-success">verified</span>
+							{% endif %}
 						</td>
 					</tr>
 				{% endfor %}

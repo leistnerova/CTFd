@@ -44,7 +44,10 @@ def sendmail(addr, text, text_type=""):
 
     try:
         smtp = get_smtp(**data)
-        msg = MIMEText(text, text_type)
+        if text_type:
+            msg = MIMEText(text, text_type)
+        else:
+            msg = MIMEText(text)
         msg['Subject'] = "Message from {0}".format(ctf_name)
         msg['From'] = mailfrom_addr
         msg['To'] = addr
