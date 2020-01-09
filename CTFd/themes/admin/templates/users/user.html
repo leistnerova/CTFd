@@ -37,21 +37,21 @@
 </div>
 
 {% if config.can_send_mail() %}
-<div id="user-email-modal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h2 class="modal-action text-center w-100">Email User</h2>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body clearfix">
-				{% include "admin/modals/mail/send.html" %}
-			</div>
-		</div>
-	</div>
-</div>
+    <div id="user-email-modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-action text-center w-100">Email User</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body clearfix">
+                    {% include "admin/modals/mail/send.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endif %}
 
 <div class="jumbotron">
@@ -105,9 +105,9 @@
 				<i class="btn-fa fas fa-trophy fa-2x px-2" data-toggle="tooltip" data-placement="top" title="Award User"></i>
 			</a>
             {% if config.can_send_mail() %}
-			<a class="email-user">
-				<i class="btn-fa fas fa-envelope fa-2x px-2" data-toggle="tooltip" data-placement="top" title="Email User"></i>
-			</a>
+                <a class="email-user">
+                    <i class="btn-fa fas fa-envelope fa-2x px-2" data-toggle="tooltip" data-placement="top" title="Email User"></i>
+                </a>
 			{% endif %}
 			<a class="delete-user">
 				<i class="btn-fa fas fa-trash-alt fa-2x px-2" data-toggle="tooltip" data-placement="top" title="Delete User"></i>
