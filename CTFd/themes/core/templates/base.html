@@ -93,9 +93,6 @@
 
 				<ul class="navbar-nav ml-md-auto d-block d-sm-flex d-md-flex">
 					{% if name is defined %}
-						<li class="nav-item">
-							<a class="nav-link" href="{{ url_for('users.private') }}">Points: {{ get_current_user_score() }}</a>
-						</li>
 						{% if type == 'admin' %}
 							<li class="nav-item">
 								<a class="nav-link" href="{{ url_for('admin.view') }}">Admin</a>

@@ -18,7 +18,7 @@ from CTFd.utils.plugins import (
 )
 
 from CTFd.utils.countries import get_countries, lookup_country_code
-from CTFd.utils.user import authed, get_ip, get_current_user, get_current_user_score, get_current_team
+from CTFd.utils.user import authed, get_ip, get_current_user, get_current_team
 from CTFd.utils.modes import generate_account_url
 from CTFd.utils.config import is_setup
 from CTFd.utils.security.csrf import generate_nonce
@@ -49,7 +49,6 @@ def init_template_globals(app):
     app.jinja_env.globals.update(get_ctf_name=ctf_name)
     app.jinja_env.globals.update(get_ctf_logo=ctf_logo)
     app.jinja_env.globals.update(get_ctf_theme=ctf_theme)
-    app.jinja_env.globals.update(get_current_user_score=get_current_user_score)
     app.jinja_env.globals.update(get_configurable_plugins=get_configurable_plugins)
     app.jinja_env.globals.update(get_registered_scripts=get_registered_scripts)
     app.jinja_env.globals.update(get_registered_stylesheets=get_registered_stylesheets)
