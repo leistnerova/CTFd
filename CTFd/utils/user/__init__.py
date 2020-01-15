@@ -14,6 +14,10 @@ def get_current_user():
         return None
 
 
+def get_current_user_score():
+    return get_current_user().score
+
+
 def get_current_team():
     if authed():
         user = get_current_user()
