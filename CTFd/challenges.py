@@ -12,6 +12,7 @@ from CTFd.utils.decorators.visibility import check_challenge_visibility
 from CTFd.utils import config, text_type, user as current_user, get_config
 from CTFd.utils.dates import ctf_paused, view_after_ctf
 from CTFd.utils.helpers import get_errors, get_infos
+from CTFd.utils.user import get_current_user
 
 challenges = Blueprint('challenges', __name__)
 
@@ -26,6 +27,8 @@ def listing():
     errors = get_errors()
     start = get_config('start') or 0
     end = get_config('end') or 0
+    user = get_current_user()
+    score = user.score
 
     if ctf_paused():
         infos.append('{} is paused'.format(config.ctf_name()))
@@ -33,4 +36,4 @@ def listing():
     if view_after_ctf():
         infos.append('{} has ended'.format(config.ctf_name()))
 
-    return render_template('challenges.html', infos=infos, errors=errors, start=int(start), end=int(end))
+    return render_template('challenges.html', infos=infos, errors=errors, start=int(start), end=int(end), score=score)
