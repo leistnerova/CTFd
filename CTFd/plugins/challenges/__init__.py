@@ -129,7 +129,10 @@ class CTFdStandardChallenge(BaseChallenge):
         flags = Flags.query.filter_by(challenge_id=challenge.id).all()
         for flag in flags:
             if get_flag_class(flag.type).compare(flag, submission):
-                return True, 'Correct'
+                if challenge.name == 'Once upon a time...':
+                    return True, 'Awake or not, you have a work to do. Let\'s get to it!'
+                else:
+                    return True, 'Correct'
         return False, 'Incorrect'
 
     @staticmethod
