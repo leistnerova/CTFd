@@ -28,6 +28,10 @@
     box-shadow: 3px 3px 3px grey;
 }
 
+.challenge-button p {
+    white-space: normal;
+}
+
 .solved-challenge {
     background-color: #37d63e !important;
     opacity: 0.4;
@@ -43,4 +47,12 @@
 
 .key-submit .btn {
     height: 51px;
+}
+
+#challenge-window .modal-dialog {
+    max-width: 800px;
+}
+
+#story {
+    padding-top: 25px;
 }

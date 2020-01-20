@@ -41,7 +41,7 @@
 <body>
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a href="{{ url_for('views.static_html', route='/') }}" class="navbar-brand">
+			<a href="{{ url_for('views.static_html', route='/', name=name) }}" class="navbar-brand">
 				{% if get_ctf_logo() %}
 				<img class="img-responsive ctf_logo" src="{{ url_for('views.files', path=get_ctf_logo()) }}" height="25" alt="{{ get_ctf_name() }}">
 				{% else %}
@@ -95,7 +95,7 @@
 					{% if name is defined %}
 						{% if type == 'admin' %}
 							<li class="nav-item">
-								<a class="nav-link" href="{{ url_for('admin.view') }}">Admin</a>
+								<a class="nav-link" href="{{ url_for('admin.view') }}">Administration</a>
 							</li>
 						{% endif %}
 						{% if config.user_mode() == "teams" %}
@@ -104,7 +104,7 @@
 						</li>
 						{% endif %}
 						<li class="nav-item">
-							<a class="nav-link" href="{{ url_for('users.private') }}">Profile</a>
+                            <a class="nav-link" href="{{ url_for('users.private') }}">{{ name }} {{ get_current_user_score() }}</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{ url_for('views.settings') }}">Settings</a>

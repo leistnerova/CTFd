@@ -12,6 +12,7 @@ from CTFd.utils.plugins import (
     register_admin_script as utils_register_admin_plugin_script,
     register_admin_stylesheet as utils_register_admin_plugin_stylesheet
 )
+from CTFd.utils.user import get_current_user
 from CTFd.utils.config.pages import get_pages
 
 
@@ -144,6 +145,13 @@ def get_user_page_menu_bar():
     return get_pages() + app.plugin_menu_bar
 
 
+def get_current_user_score():
+    user = get_current_user()
+    if user:
+        return "( {} )".format(user.score)
+    return ""
+
+
 def bypass_csrf_protection(f):
     """
     Decorator that allows a route to bypass the need for a CSRF nonce on POST requests.
@@ -186,3 +194,4 @@ def init_plugins(app):
 
     app.jinja_env.globals.update(get_admin_plugin_menu_bar=get_admin_plugin_menu_bar)
     app.jinja_env.globals.update(get_user_page_menu_bar=get_user_page_menu_bar)
+    app.jinja_env.globals.update(get_current_user_score=get_current_user_score)

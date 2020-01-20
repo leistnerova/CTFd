@@ -57,7 +57,7 @@ class ChallengeList(Resource):
 
         challenges = Challenges.query.filter(
             and_(Challenges.state != 'hidden', Challenges.state != 'locked')
-        ).order_by(Challenges.value).all()
+        ).order_by(Challenges.order_priority, Challenges.value).all()
 
         if user:
             solve_ids = Solves.query\

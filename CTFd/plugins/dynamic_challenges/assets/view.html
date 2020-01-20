@@ -5,9 +5,18 @@
 				<span aria-hidden="true">&times;</span>
 			</button>
 			<ul class="nav nav-tabs">
-				<li class="nav-item">
-					<a class="nav-link active" href="#challenge">Challenge</a>
-				</li>
+				{% if story == None or story == "" %}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#challenge">Challenge</a>
+                    </li>
+				{% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active challenge-story" href="#story">Story</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link challenge-main" href="#challenge">Challenge</a>
+                    </li>
+				{% endif %}
 				{% if solves == None %}
 				{% else %}
 					<li class="nav-item">
@@ -19,7 +28,14 @@
 			</ul>
 			<div role="tabpanel">
 				<div class="tab-content">
-					<div role="tabpanel" class="tab-pane fade show active" id="challenge">
+                    {% if story == None or story == "" %}
+                        <div role="tabpanel" class="tab-pane fade show active" id="challenge">
+                    {% else %}
+                        <div role="tabpanel" class="tab-pane fade show active" id="story">
+                            <span class="challenge-desc">{{ story | safe }}</span>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="challenge">
+                    {% endif %}
 						<h2 class='challenge-name text-center pt-3'>{{ name }}</h2>
 						<h3 class="challenge-value text-center">{{ value }}</h3>
 						<div class="challenge-tags text-center">
@@ -56,7 +72,7 @@
 							{% for file in files %}
 								<div class='col-md-4 col-sm-4 col-xs-12 file-button-wrapper d-block'>
 									<a class='btn btn-info btn-file mb-1 d-inline-block px-2 w-100 text-truncate'
-									   href='{{ script_root }}/files/{{ file }}'>
+									   href='{{ script_root }}/files/{{ file }}' target="_blank">
 										<i class="fas fa-download"></i>
 										<small>
 											{{ file.split('/')[1] }}
