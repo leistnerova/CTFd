@@ -56,3 +56,11 @@
     font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
     -webkit-appearance: none;
 }
+
+#challenge-window .modal-dialog {
+    max-width: 800px;
+}
+
+#story {
+    padding-top: 25px;
+}

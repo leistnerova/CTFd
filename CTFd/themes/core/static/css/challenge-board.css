@@ -52,3 +52,7 @@
 #challenge-window .modal-dialog {
     max-width: 800px;
 }
+
+#story {
+    padding-top: 25px;
+}
