@@ -48,3 +48,7 @@
 .key-submit .btn {
     height: 51px;
 }
+
+#challenge-window .modal-dialog {
+    max-width: 800px;
+}

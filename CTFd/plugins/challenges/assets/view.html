@@ -5,7 +5,7 @@
 				<span aria-hidden="true">&times;</span>
 			</button>
 			<ul class="nav nav-tabs">
-				{% if story == None %}
+				{% if story == None or story == "" %}
                     <li class="nav-item">
                         <a class="nav-link active" href="#challenge">Challenge</a>
                     </li>
@@ -28,7 +28,7 @@
 			</ul>
 			<div role="tabpanel">
 				<div class="tab-content">
-                    {% if story == None %}
+                    {% if story == None or story == "" %}
                         <div role="tabpanel" class="tab-pane fade show active" id="challenge">
                     {% else %}
                         <div role="tabpanel" class="tab-pane fade show active" id="story">
