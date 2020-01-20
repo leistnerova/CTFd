@@ -26,7 +26,7 @@ def users_listing():
                 users = []
                 errors.append('Your ID search term is not numeric')
         elif field == 'name':
-            users = Users.query.filter(Users.name.like('%{}%'.format(q))).order_by(Users.id.asc()).all()
+            users = Users.query.filter(Users.name.like('%{}%'.format(q))).order_by(Users.verified.desc(), Users.id.asc()).all()
         elif field == 'email':
             users = Users.query.filter(Users.email.like('%{}%'.format(q))).order_by(Users.id.asc()).all()
         elif field == 'affiliation':
