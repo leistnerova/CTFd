@@ -12,6 +12,13 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 offset-md-3">
+            {% if autocreate == 1 %}
+				<div id="password-warning" class="form-group">
+                    <div class="alert alert-warning alert-dismissable submit-row" role="alert">
+                        Set up your password!
+                    </div>
+				</div>
+            {% endif %}
 			{% if confirm_email %}
 				<div class="alert alert-info alert-dismissable submit-row" role="alert">
 					Your email address isn't confirmed!
@@ -40,17 +47,21 @@
 
 				<hr>
 
-				<div class="form-group">
-					<label for="confirm-input">
-						Current Password
-					</label>
-					<input class="form-control" type="password" name="confirm" id="confirm-input" />
-				</div>
+                {% if autocreate == 1 %}
+                    <input type="hidden" name="confirm" value="{{ old_password }}" />
+                {% else %}
+                    <div class="form-group">
+                        <label for="confirm-input">
+                            Current Password
+                        </label>
+                        <input class="form-control" type="password" name="confirm" id="confirm-input" />
+                    </div>
+                {% endif %}
 				<div class="form-group">
 					<label for="password-input">
 						New Password
 					</label>
-					<input class="form-control" type="password" name="password" id="password-input" />
+                    <input class="form-control" type="password" name="password" id="password-input" />
 				</div>
 
 				<hr>

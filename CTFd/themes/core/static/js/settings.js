@@ -51,6 +51,7 @@ $(function () {
                         $('#results').html(
                             success_template
                         );
+                        $('#password-warning').hide();
                     }
                 });
             }
