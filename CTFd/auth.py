@@ -167,7 +167,7 @@ def register():
         if emails:
             if auto_create:  # already was created, go to login
                 user = Users.query.filter_by(email=email_address).first()
-                return redirect(url_for('auth.login', name=user.name))
+                return redirect(url_for('auth.login', login_name=user.name))
             errors.append('That email has already been used')
         if pass_short:
             errors.append('Pick a longer password')
@@ -267,7 +267,7 @@ def login():
             return render_template('login.html', errors=errors)
     else:
         db.session.close()
-        return render_template('login.html', name=request.args.get('name', None), errors=errors)
+        return render_template('login.html', login_name=request.args.get('login_name', None), errors=errors)
 
 
 @auth.route('/oauth')

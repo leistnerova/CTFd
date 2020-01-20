@@ -41,6 +41,9 @@ function updateChalWindow(obj) {
                 window.challenge.preRender();
 
                 challenge_data['description'] = window.challenge.render(challenge_data['description']);
+                if (challenge_data['story']) {
+                    challenge_data['story'] = window.challenge.render(challenge_data['story']);
+                }
                 challenge_data['script_root'] = script_root;
 
                 $('#challenge-window').append(template.render(challenge_data));
@@ -68,7 +71,12 @@ function updateChalWindow(obj) {
                     $('#submit-key').addClass("disabled-button");
                     $('#submit-key').prop('disabled', true);
                     window.challenge.submit(function (data) {
-                        renderSubmissionResponse(data);
+                        $('.alert').hide();
+
+                        setTimeout(function () {
+                            renderSubmissionResponse(data);
+                        }, 10);
+
                         loadchals(function () {
                             marksolves();
                         });
@@ -163,8 +171,8 @@ function renderSubmissionResponse(response, cb) {
             answer_input.removeClass("too-fast");
         }, 3000);
     }
+
     setTimeout(function () {
-        $('.alert').slideUp();
         $('#submit-key').removeClass("disabled-button");
         $('#submit-key').prop('disabled', false);
     }, 3000);
