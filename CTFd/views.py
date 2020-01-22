@@ -148,7 +148,8 @@ def settings():
         affiliation=affiliation,
         country=country,
         prevent_name_change=prevent_name_change,
-        confirm_email=confirm_email
+        confirm_email=confirm_email,
+        verified=user.verified
     )
 
 
