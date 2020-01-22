@@ -1,0 +1,37 @@
+.bg-dark {
+    background-color: #1a1a1a !important;
+}
+
+a {
+    color: #10565c;
+}
+
+a:hover {
+    color: #444444;
+}
+
+* {
+    font-family: RedHatText, Overpass, Overpass, Helvetica, Arial, sans-serif;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #10565c;
+    border-color: #1a1a1a !important;
+}
+
+.btn-info, .btn-hint {
+    background-color: #10565c !important;
+    border-color: #1a1a1a !important;
+}
+
+.btn-hint:hover, .btn-file:hover, .btn-primary:hover {
+    background-color: #444444 !important;
+}
