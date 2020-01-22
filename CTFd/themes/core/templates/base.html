@@ -13,6 +13,8 @@
 	<link rel="stylesheet" href="{{ url_for('views.themes', path='css/jumbotron.css') }}">
 	<link rel="stylesheet" href="{{ url_for('views.themes', path='css/sticky-footer.css') }}">
 	<link rel="stylesheet" href="{{ url_for('views.themes', path='css/base.css') }}">
+    <link rel="stylesheet" href="http://overpass-30e2.kxcdn.com/overpass.css" />
+    <link href="https://static.redhat.com/libs/redhat/redhat-font/2/webfonts/red-hat-font.css" rel="stylesheet" />
 	{% block stylesheets %}{% endblock %}
 	{% for stylesheet in get_registered_stylesheets() %}
 		{% if stylesheet.startswith('http') %}
@@ -24,6 +26,7 @@
 		{% endif %}
 	{% endfor %}
 	<link rel="stylesheet" type="text/css" href="{{ url_for('views.custom_css') }}">
+	<link rel="stylesheet" href="{{ url_for('views.themes', path='css/rh.css') }}">
 	<script src="{{ url_for('views.themes', path='js/vendor/promise-polyfill.min.js') }}"></script>
 	<script src="{{ url_for('views.themes', path='js/vendor/fetch.min.js') }}"></script>
 	<script src="{{ url_for('views.themes', path='js/CTFd.js') }}"></script>
@@ -44,9 +47,8 @@
 			<a href="{{ url_for('views.static_html', route='/', name=name) }}" class="navbar-brand">
 				{% if get_ctf_logo() %}
 				<img class="img-responsive ctf_logo" src="{{ url_for('views.files', path=get_ctf_logo()) }}" height="25" alt="{{ get_ctf_name() }}">
-				{% else %}
-				{{ get_ctf_name() }}
 				{% endif %}
+				{{ get_ctf_name() }}
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#base-navbars"
 					aria-controls="base-navbars" aria-expanded="false" aria-label="Toggle navigation">
