@@ -224,7 +224,7 @@ def register():
             if config.can_send_mail():
                 return redirect(url_for('views.welcome', autocreate=1))
             else:
-                return render_template('settings.html', autocreate=1, old_password=password)
+                return render_template('settings.html', autocreate=1, old_password=password, verified=1)
 
         return redirect(url_for('challenges.listing'))
     else:
