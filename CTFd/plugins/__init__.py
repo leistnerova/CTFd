@@ -148,7 +148,7 @@ def get_user_page_menu_bar():
 def get_current_user_score():
     user = get_current_user()
     if user:
-        return "( {} )".format(user.score)
+        return "( {} p)".format(user.score)
     return ""
 
 
