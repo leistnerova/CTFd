@@ -4,10 +4,12 @@
 
 a {
     color: #10565c;
+    font-weight: bold;
 }
 
 a:hover {
     color: #444444;
+    font-weight: bold;
 }
 
 * {
