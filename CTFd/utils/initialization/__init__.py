@@ -8,6 +8,7 @@ from CTFd.utils.dates import unix_time_millis, unix_time, isoformat
 from CTFd.utils import config
 from CTFd.utils.config import can_send_mail, ctf_logo, ctf_name, ctf_theme
 from CTFd.utils.config.pages import get_pages
+from CTFd.utils.dates import ctf_paused
 
 from CTFd.utils.plugins import (
     get_registered_stylesheets,
@@ -49,6 +50,7 @@ def init_template_globals(app):
     app.jinja_env.globals.update(get_ctf_name=ctf_name)
     app.jinja_env.globals.update(get_ctf_logo=ctf_logo)
     app.jinja_env.globals.update(get_ctf_theme=ctf_theme)
+    app.jinja_env.globals.update(get_ctf_paused=ctf_paused)
     app.jinja_env.globals.update(get_configurable_plugins=get_configurable_plugins)
     app.jinja_env.globals.update(get_registered_scripts=get_registered_scripts)
     app.jinja_env.globals.update(get_registered_stylesheets=get_registered_stylesheets)

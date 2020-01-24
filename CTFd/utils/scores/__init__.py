@@ -74,6 +74,7 @@ def get_standings(count=None, admin=False):
             Model.id.label('account_id'),
             Model.oauth_id.label('oauth_id'),
             Model.name.label('name'),
+            Model.email,
             Model.hidden,
             Model.banned,
             Model.verified,
