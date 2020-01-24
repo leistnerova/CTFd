@@ -13,7 +13,12 @@
 				<thead>
 					<tr>
 						<td width="10px"><b>Place</b></td>
-						<td><b>Team</b></td>
+						{% if get_config('user_mode') == 'teams' %}
+                            <td><b>Team</b></td>
+						{% else %}
+                            <td><b>Name</b></td>
+                            <td><b>Email</b></td>
+						{% endif %}
 						<td><b>Score</b></td>
 						<td><b>Visibility</b></td>
 						<td><b>Verified</b></td>
@@ -38,6 +43,11 @@
 									{% endif %}
 								{% endif %}
 							</a>
+						</td>
+                        <td>
+						{% if get_config('user_mode') == 'users' %}
+                            <a href="mailto:{{ standing.email }}" target="_blank">{{ standing.email | truncate(32) }}</a>
+                        {% endif %}
 						</td>
 						<td>{{ standing.score }}</td>
 						<td>

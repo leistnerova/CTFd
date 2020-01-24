@@ -23,14 +23,15 @@ challenges = Blueprint('challenges', __name__)
 @require_team
 def listing():
     infos = get_infos()
+    warnings = []
     errors = get_errors()
     start = get_config('start') or 0
     end = get_config('end') or 0
 
     if ctf_paused():
-        infos.append('{} is paused'.format(config.ctf_name()))
+        warnings.append('{} is paused'.format(config.ctf_name()))
 
     if view_after_ctf():
         infos.append('{} has ended'.format(config.ctf_name()))
 
-    return render_template('challenges.html', infos=infos, errors=errors, start=int(start), end=int(end))
+    return render_template('challenges.html', infos=infos, warnings=warnings, errors=errors, start=int(start), end=int(end))

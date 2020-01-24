@@ -130,6 +130,16 @@
 		</div>
 	</nav>
 
+    {% if get_ctf_paused() and request.path == '/' %}
+        <div class="container-fluid bg-warning text-center py-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>{{ get_ctf_name() }} is paused.</h3>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
 	<main role="main">
 		{% block content %}
 		{% endblock %}
