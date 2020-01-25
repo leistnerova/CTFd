@@ -48,15 +48,15 @@
 			</select>
 		</div>
 		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="checkbox" name="verified" id="verified-checkbox">
+            <input class="form-check-input" type="checkbox" name="verified" id="verified-checkbox" {% if user.verified %} checked="1" {% endif %}>
 			<label class="form-check-label" for="verified-checkbox">Verified</label>
 		</div>
 		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="checkbox" name="hidden" id="hidden-checkbox">
+			<input class="form-check-input" type="checkbox" name="hidden" id="hidden-checkbox" {% if user.hidden %} checked="1" {% endif %}>
 			<label class="form-check-label" for="hidden-checkbox">Hidden</label>
 		</div>
 		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="checkbox" name="banned" id="banned-checkbox">
+			<input class="form-check-input" type="checkbox" name="banned" id="banned-checkbox" {% if user.banned %} checked="1" {% endif %}>
 			<label class="form-check-label" for="banned-checkbox">Banned</label>
 		</div>
 	</div>

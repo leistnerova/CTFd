@@ -434,7 +434,7 @@ class Users(db.Model):
                 Users.id.label('user_id'),
             ) \
                 .join(sumscores, Users.id == sumscores.columns.user_id) \
-                .order_by(sumscores.columns.score.desc(), sumscores.columns.id)
+                .order_by(Users.verified.desc(), sumscores.columns.score.desc(), sumscores.columns.id)
         else:
             standings_query = db.session.query(
                 Users.id.label('user_id'),
