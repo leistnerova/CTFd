@@ -7,7 +7,7 @@ from flask import (
     session,
     Blueprint,
 )
-from CTFd.models import db, Users, Teams
+from CTFd.models import db, Configs, Users, Teams
 
 from CTFd.utils import get_config, get_app_config
 from CTFd.utils.decorators import ratelimit
@@ -186,10 +186,14 @@ def register():
             )
         else:
             with app.app_context():
+                contest_run = Configs.query.filter_by(key='contest_run').first()
+                contest_run_number = Configs.query.filter_by(key='contest_run_number').first()
                 user = Users(
                     name=name.strip(),
                     email=email_address.lower(),
-                    password=password.strip()
+                    password=password.strip(),
+                    contest_run=contest_run.value,
+                    contest_run_number=contest_run_number.value
                 )
                 if auto_create:
                     user.verified = True

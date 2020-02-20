@@ -2,6 +2,23 @@
 	<form method="POST" autocomplete="off" class="w-100">
 		<div class="form-group">
 			<label>
+				Contest run name<br>
+				<small class="form-text text-muted">
+                    Different run name of the contest (e.g. name of the conference)
+				</small>
+			</label>
+			<input class="form-control" name='contest_run' type='text' {% if contest_run is defined and contest_run != None %}value="{{ contest_run }}"{% endif %}>
+            <input type="hidden" name="contest_run_old" value='{% if contest_run is defined and contest_run != None %}{{ contest_run }}{% endif %}' />
+			<label>
+				<small class="form-text text-muted">
+                   Run number (resets with change of run name or changes with reset of the run)
+				</small>
+			</label>
+			<input class="form-control" name='contest_run_number' type='text' value="{{ contest_run_number }}" disabled>
+		</div>
+
+		<div class="form-group">
+			<label>
 				Challenge Visibility<br>
 				<small class="form-text text-muted">
 					Control whether users must be logged in to see challenges

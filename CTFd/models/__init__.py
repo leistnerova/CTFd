@@ -294,6 +294,10 @@ class Users(db.Model):
 
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
+    # Contest definition
+    contest_run = db.Column(db.String(128))
+    contest_run_number = db.Column(db.String(2))
+
     __mapper_args__ = {
         'polymorphic_identity': 'user',
         'polymorphic_on': type

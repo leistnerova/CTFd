@@ -190,3 +190,14 @@ def reset():
         return redirect(url_for('views.setup'))
 
     return render_template('admin/reset.html')
+
+
+@admin.route('/admin/reset_run', methods=['GET', 'POST'])
+@admins_only
+def reset_run():
+    if request.method == 'POST':
+        set_config('contest_run_number', int(get_config('contest_run_number')) + 1)
+        Users.query.filter().update({'verified': False})
+        db.session.commit()
+        return redirect(url_for('admin.users_listing'))
+    return render_template('admin/reset_run.html')

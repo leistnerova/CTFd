@@ -6,7 +6,7 @@
 {% block content %}
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Reset</h1>
+			<h1>Reset run</h1>
 		</div>
 	</div>
 	<div class="container">
@@ -15,16 +15,8 @@
 				<form method="POST" id="reset-ctf-form">
 					<div class="alert alert-danger" role="alert">
 						<p>
-							Resetting your CTF will delete all user and team data. Think carefully before resetting because
-							no automated backups are made and all non-challenge data is lost.
+							Resetting your run will change verified=False for all users. Run number will increase by 1.
 						</p>
-
-						<span>
-							<strong>
-								Create backups of all data you need by <a href="{{ url_for('admin.config', _anchor='backup') }}">creating a CTFd Export</a>
-								or by copying the database and CTFd source code folder.
-							</strong>
-						</span>
 					</div>
 
 					<input id="nonce" type="hidden" name="nonce" value="{{ nonce }}">
@@ -36,7 +28,7 @@
                     </div>
                     <div style="float: left; width: 70%;">
                         <button class="btn btn-warning btn-lg btn-block">
-                            Reset CTF
+                            Reset run
                         </button>
                     </div>
 				</form>
@@ -50,8 +42,8 @@
 		$('#reset-ctf-form').submit(function(e){
 			e.preventDefault();
 			ezq({
-				title: "Reset CTF?",
-				body: "Are you sure you want to reset your CTFd instance?",
+				title: "Reset run?",
+				body: "Are you sure you want to reset your run?",
 				success: function () {
 					$('#reset-ctf-form').off('submit').submit();
 				}
